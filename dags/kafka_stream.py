@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -18,6 +19,7 @@ def get_data():
 def format_data(res):
     data = {}
     location = res["location"]
+    data["id"] = str(uuid.uuid4())
     data["first_name"] = res["name"]["first"]
     data["last_name"] = res["name"]["last"]
     data["gender"] = res["gender"]
